@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.API", "ServiceHub.API\ServiceHub.API.csproj", "{404614E3-8C5E-4CE8-9856-C1AF948C24B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.UnitTest", "ServiceHub.UnitTest\ServiceHub.UnitTest.csproj", "{2992A14D-474A-4EEB-B0BD-FD8021E9C042}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{404614E3-8C5E-4CE8-9856-C1AF948C24B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{404614E3-8C5E-4CE8-9856-C1AF948C24B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{404614E3-8C5E-4CE8-9856-C1AF948C24B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{404614E3-8C5E-4CE8-9856-C1AF948C24B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2992A14D-474A-4EEB-B0BD-FD8021E9C042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2992A14D-474A-4EEB-B0BD-FD8021E9C042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2992A14D-474A-4EEB-B0BD-FD8021E9C042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2992A14D-474A-4EEB-B0BD-FD8021E9C042}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08D3315E-F479-4CBD-9347-223A561975FB}
+	EndGlobalSection
+EndGlobal
