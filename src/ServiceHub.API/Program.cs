@@ -1,4 +1,7 @@
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Configuration;
 using ServiceHub.API.Application.Features.Services;
+using ServiceHub.API.Logger;
 using ServiceHub.ServiceEngine.HostedServices;
 using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
 using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
@@ -34,18 +37,30 @@ builder.Services.AddSwaggerGen();
 //});
 var app = builder.Build();
 
-app.MapGet("/background", (
-    PeriodicBackgroundService service) =>
+var loggerFactory = app.Services.GetService<ILoggerFactory>();
+var logPath = @"C:\temp";
+if (loggerFactory != null)
 {
-    return new PeriodicHostedServiceState(service.IsEnabled);
-});
-app.MapMethods("/background", new[] { "PATCH" }, 
-(
-    PeriodicHostedServiceState state,
-    PeriodicBackgroundService service) =>
-{
-    service.IsEnabled = state.IsEnabled;
-});
+    loggerFactory.AddFile(Path.Combine(logPath, "auction_log.txt"));
+    var auctionLogger = loggerFactory.CreateLogger("AuctionLogger");
+    loggerFactory.AddFile(Path.Combine(logPath, "requests_log.txt"));
+    var requestsLogger = loggerFactory.CreateLogger("RequestLogger");
+    loggerFactory.AddFile(Path.Combine(logPath, "error_log.txt"));
+    var errorLogger = loggerFactory.CreateLogger("ErrorLogger");
+}
+
+//app.MapGet("/background", (
+//    PeriodicBackgroundService service) =>
+//{
+//    return new PeriodicHostedServiceState(service.IsEnabled);
+//});
+//app.MapMethods("/background", new[] { "PATCH" }, 
+//(
+//    PeriodicHostedServiceState state,
+//    PeriodicBackgroundService service) =>
+//{
+//    service.IsEnabled = state.IsEnabled;
+//});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
