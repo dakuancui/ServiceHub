@@ -1,8 +1,8 @@
 using ServiceHub.API.Application.Features.Services;
-using ServiceHub.API.Application.ServiceTypes.Periodic;
-using ServiceHub.API.Application.ServiceTypes.Scoped;
-using ServiceHub.API.Application.ServiceTypes.Singleton;
-using ServiceHub.API.HostedServices;
+using ServiceHub.ServiceEngine.HostedServices;
+using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
+using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
+using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +22,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 //builder.Logging.AddJsonConsole(options =>
 //{
 //    options.IncludeScopes = false;

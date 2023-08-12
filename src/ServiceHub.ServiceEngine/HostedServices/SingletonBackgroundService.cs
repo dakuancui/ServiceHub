@@ -1,6 +1,9 @@
-﻿using ServiceHub.API.Application.ServiceTypes.Singleton;
+﻿
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
 
-namespace ServiceHub.API.HostedServices
+namespace ServiceHub.ServiceEngine.HostedServices
 {
     public class SingletonBackgroundService : BackgroundService
     {

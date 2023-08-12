@@ -1,4 +1,4 @@
-﻿using ServiceHub.API.Application.ServiceTypes.Periodic;
+﻿using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
 
 namespace ServiceHub.API.Application.Features.Services
 {

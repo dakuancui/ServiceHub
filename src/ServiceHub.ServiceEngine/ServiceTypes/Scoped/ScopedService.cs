@@ -1,4 +1,6 @@
-﻿namespace ServiceHub.API.Application.ServiceTypes.Scoped
+﻿using Microsoft.Extensions.Logging;
+
+namespace ServiceHub.ServiceEngine.ServiceTypes.Scoped
 {
     public abstract class ScopedService : IScopedService
     {

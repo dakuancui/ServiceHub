@@ -1,4 +1,4 @@
-﻿namespace ServiceHub.API.Application.ServiceTypes.Periodic
+﻿namespace ServiceHub.ServiceEngine.ServiceTypes.Periodic
 {
     public interface IPeriodicService
     {

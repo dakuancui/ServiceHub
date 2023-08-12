@@ -1,4 +1,6 @@
-﻿namespace ServiceHub.API.Application.ServiceTypes.Periodic
+﻿using Microsoft.Extensions.Logging;
+
+namespace ServiceHub.ServiceEngine.ServiceTypes.Periodic
 {
     public abstract class PeriodicService : IPeriodicService
     {

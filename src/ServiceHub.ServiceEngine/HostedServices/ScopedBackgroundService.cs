@@ -1,6 +1,9 @@
-﻿using ServiceHub.API.Application.ServiceTypes.Scoped;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
 
-namespace ServiceHub.API.HostedServices
+namespace ServiceHub.ServiceEngine.HostedServices
 {
     public class ScopedBackgroundService : BackgroundService
     {

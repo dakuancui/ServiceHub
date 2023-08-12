@@ -1,4 +1,4 @@
-﻿namespace ServiceHub.API.Application.ServiceTypes.Scoped
+﻿namespace ServiceHub.ServiceEngine.ServiceTypes.Scoped
 {
     public interface IScopedService
     {

@@ -1,4 +1,5 @@
-﻿using ServiceHub.API.Application.ServiceTypes.Singleton;
+﻿
+using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
 
 namespace ServiceHub.API.Application.Features.Services
 {

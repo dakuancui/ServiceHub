@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using ServiceHub.API.Application.ServiceTypes.Periodic;
-using ServiceHub.API.HostedServices;
+using ServiceHub.ServiceEngine.HostedServices;
+using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
 
 namespace ServiceHub.API.Controllers
 {

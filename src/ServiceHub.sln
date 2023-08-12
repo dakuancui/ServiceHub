@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.API", "ServiceHub.API\ServiceHub.API.csproj", "{404614E3-8C5E-4CE8-9856-C1AF948C24B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHub.API", "ServiceHub.API\ServiceHub.API.csproj", "{404614E3-8C5E-4CE8-9856-C1AF948C24B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.UnitTest", "ServiceHub.UnitTest\ServiceHub.UnitTest.csproj", "{2992A14D-474A-4EEB-B0BD-FD8021E9C042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHub.UnitTest", "ServiceHub.UnitTest\ServiceHub.UnitTest.csproj", "{2992A14D-474A-4EEB-B0BD-FD8021E9C042}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.ServiceEngine", "ServiceHub.ServiceEngine\ServiceHub.ServiceEngine.csproj", "{726523DA-E2AF-42C7-8631-B538779A4C4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2992A14D-474A-4EEB-B0BD-FD8021E9C042}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2992A14D-474A-4EEB-B0BD-FD8021E9C042}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2992A14D-474A-4EEB-B0BD-FD8021E9C042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726523DA-E2AF-42C7-8631-B538779A4C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726523DA-E2AF-42C7-8631-B538779A4C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726523DA-E2AF-42C7-8631-B538779A4C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726523DA-E2AF-42C7-8631-B538779A4C4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

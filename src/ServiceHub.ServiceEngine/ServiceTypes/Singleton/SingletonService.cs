@@ -1,4 +1,4 @@
-﻿namespace ServiceHub.API.Application.ServiceTypes.Singleton
+﻿namespace ServiceHub.ServiceEngine.ServiceTypes.Singleton
 {
     public abstract class SingletonService : ISingletonService
     {
