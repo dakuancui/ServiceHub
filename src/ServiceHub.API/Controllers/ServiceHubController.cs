@@ -10,7 +10,9 @@ namespace ServiceHub.API.Controllers
     {
         private readonly ILogger<ServiceHubController> _logger;
         private readonly PeriodicBackgroundService _periodicBackgroundService;
-        public ServiceHubController(ILogger<ServiceHubController> logger, PeriodicBackgroundService periodicBackgroundService)
+
+        public ServiceHubController(ILogger<ServiceHubController> logger, 
+            PeriodicBackgroundService periodicBackgroundService)
         {
             _logger = logger;
             _periodicBackgroundService = periodicBackgroundService;
@@ -22,12 +24,20 @@ namespace ServiceHub.API.Controllers
             return new PeriodicHostedServiceState(_periodicBackgroundService.IsEnabled);
         }
 
-        [HttpPatch(Name = "PeriodicService")]
-        public IActionResult Patch([FromBody] PeriodicHostedServiceState state)
+        [HttpPatch(Name = "Service")]
+        public IActionResult Patch(string servicetype, [FromBody] PeriodicHostedServiceState state)
         {
-            _periodicBackgroundService.IsEnabled = state.IsEnabled;
+            if (servicetype == "periodic")
+            {
+                _periodicBackgroundService.IsEnabled = state.IsEnabled;
+            }
             return Accepted();
         }
 
+        [HttpGet(Name = "LoadProfiles")]
+        public IActionResult LoadProfiles()
+        {
+            return Accepted();
+        }
     }
 }

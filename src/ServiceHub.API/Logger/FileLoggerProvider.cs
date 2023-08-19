@@ -2,14 +2,14 @@
 {
     public class FileLoggerProvider : ILoggerProvider
     {
-        private string _path;
-        public FileLoggerProvider(string path)
+        private string _rootPath;
+        public FileLoggerProvider(string rootPath)
         {
-            _path = path;
+            _rootPath = rootPath;
         }
         public ILogger CreateLogger(string categoryName)
         {
-            return new FileLogger(_path);
+            return new FileLogger(Path.Combine(_rootPath, $"{categoryName.GetLogFileName()}.{DateTime.Today:yyyy-MM-dd}.log"));
         }
 
         public void Dispose()

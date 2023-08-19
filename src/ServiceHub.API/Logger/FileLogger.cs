@@ -26,7 +26,7 @@
             {
                 lock (_lock)
                 {
-                    File.AppendAllText(_filePath, formatter(state, exception) + Environment.NewLine);
+                    File.AppendAllText(_filePath, $"{DateTime.UtcNow.ToString("yyyy-MM-dd:HH:mm:ss.ffff")} {logLevel}:{formatter(state, exception)} {Environment.NewLine}");
                 }
             }
         }

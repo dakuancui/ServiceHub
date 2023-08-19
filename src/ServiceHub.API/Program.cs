@@ -1,6 +1,6 @@
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Configuration;
+using ServiceHub.API.Application.Features;
 using ServiceHub.API.Application.Features.Services;
+using ServiceHub.API.Application.Models;
 using ServiceHub.API.Logger;
 using ServiceHub.ServiceEngine.HostedServices;
 using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<ISingletonService, SingletonExampleService>();
+builder.Services.AddSingleton<ISingletonService, HealthLinkInterfaceService<IProfile, IFeature>>();
 builder.Services.AddHostedService<SingletonBackgroundService>();
 
 builder.Services.AddScoped<IScopedService, ScopedExampleService>();
@@ -38,16 +39,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 var loggerFactory = app.Services.GetService<ILoggerFactory>();
-var logPath = @"C:\temp";
-if (loggerFactory != null)
-{
-    loggerFactory.AddFile(Path.Combine(logPath, "auction_log.txt"));
-    var auctionLogger = loggerFactory.CreateLogger("AuctionLogger");
-    loggerFactory.AddFile(Path.Combine(logPath, "requests_log.txt"));
-    var requestsLogger = loggerFactory.CreateLogger("RequestLogger");
-    loggerFactory.AddFile(Path.Combine(logPath, "error_log.txt"));
-    var errorLogger = loggerFactory.CreateLogger("ErrorLogger");
-}
+var logRootPath = @"C:\temp";
+loggerFactory?.AddLogRootPath(logRootPath);
 
 //app.MapGet("/background", (
 //    PeriodicBackgroundService service) =>
