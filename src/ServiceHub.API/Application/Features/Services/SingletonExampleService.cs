@@ -1,22 +1,24 @@
 ﻿
-using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
+using ServiceHub.ServiceEngine.HostedServices;
+//using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
 
 namespace ServiceHub.API.Application.Features.Services
 {
-    public class SingletonExampleService : SingletonService
+    public class SingletonExampleService : SingletonBackgroundService
     {
-        private readonly ILogger<SingletonExampleService> _logger; 
-        public SingletonExampleService(ILogger<SingletonExampleService> logger) 
+        private readonly ILogger<SingletonExampleService> _logger;
+
+        public SingletonExampleService(ILogger<SingletonExampleService> logger): base(logger)
         {
             _logger = logger;
         }
 
-        public async override Task DoAsync()
+        public override Task DoWorkAsync(CancellationToken cancellationToken)
         {
             Joke joke = _jokes.ElementAt(
                 Random.Shared.Next(_jokes.Count));
-            await Task.Delay(TimeSpan.FromSeconds(5));
             _logger.LogWarning("{Joke}", joke);
+            return Task.CompletedTask;
         }
 
         private readonly HashSet<Joke> _jokes = new()

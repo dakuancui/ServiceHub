@@ -5,15 +5,14 @@ using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
 
 namespace ServiceHub.ServiceEngine.HostedServices
 {
-    public class SingletonBackgroundService : BackgroundService
+    public abstract class SingletonBackgroundService : BackgroundService
     {
-        private readonly ISingletonService _singletonService;
         private readonly ILogger<SingletonBackgroundService> _logger;
 
-        public SingletonBackgroundService(
-        ISingletonService singletonService,
-        ILogger<SingletonBackgroundService> logger) =>
-        (_singletonService, _logger) = (singletonService, logger);
+        public SingletonBackgroundService(ILogger<SingletonBackgroundService> logger) =>
+        ( _logger) = (logger);
+
+        public abstract Task DoWorkAsync(CancellationToken cancellationToken);
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -21,7 +20,7 @@ namespace ServiceHub.ServiceEngine.HostedServices
             {
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    await _singletonService.DoWorkAsync(stoppingToken);
+                    await DoWorkAsync(stoppingToken);
                     await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
                 }
             }

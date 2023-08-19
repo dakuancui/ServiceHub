@@ -5,14 +5,13 @@ using ServiceHub.API.Logger;
 using ServiceHub.ServiceEngine.HostedServices;
 using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
 using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
-using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
+//using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<ISingletonService, SingletonExampleService>();
-builder.Services.AddSingleton<ISingletonService, HealthLinkInterfaceService<IProfile, IFeature>>();
-builder.Services.AddHostedService<SingletonBackgroundService>();
+builder.Services.AddHostedService<SingletonExampleService>();
+builder.Services.AddHostedService<HealthLinkInterfaceService<IProfile, IFeature>>();
 
 builder.Services.AddScoped<IScopedService, ScopedExampleService>();
 builder.Services.AddHostedService<ScopedBackgroundService>();
@@ -39,7 +38,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 var loggerFactory = app.Services.GetService<ILoggerFactory>();
-var logRootPath = @"C:\temp";
+var logRootPath = @"/Users/DakuanC/Dakuan.asb/spikes/ServiceHub/src";
 loggerFactory?.AddLogRootPath(logRootPath);
 
 //app.MapGet("/background", (
