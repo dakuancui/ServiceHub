@@ -10,8 +10,8 @@
 
         public static string GetLogFileName(this string categoryName)
         {
-            if (categoryName.Contains("features", StringComparison.OrdinalIgnoreCase))
-                return categoryName.Substring(categoryName.IndexOf("Features.Services."));
+            if (categoryName.Contains("Services.", StringComparison.OrdinalIgnoreCase))
+                return categoryName.Substring(categoryName.IndexOf("Services."));
             return "ServiceHub.Hosting";
         }
     }

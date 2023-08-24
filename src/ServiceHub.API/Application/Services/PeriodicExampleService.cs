@@ -1,6 +1,6 @@
 ﻿using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
 
-namespace ServiceHub.API.Application.Features.Services
+namespace ServiceHub.API.Application.Services
 {
     public class PeriodicExampleService : PeriodicService
     {

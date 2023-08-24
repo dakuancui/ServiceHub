@@ -1,7 +1,7 @@
 ﻿
 using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
 
-namespace ServiceHub.API.Application.Features.Services
+namespace ServiceHub.API.Application.Services
 {
     public class ScopedExampleService : ScopedService
     {

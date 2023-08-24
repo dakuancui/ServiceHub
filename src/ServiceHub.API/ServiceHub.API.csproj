@@ -17,4 +17,14 @@
     <ProjectReference Include="..\ServiceHub.ServiceEngine\ServiceHub.ServiceEngine.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Application\Models\FeatureConfigurations\" />
+    <None Remove="Application\Environment\" />
+    <None Remove="Application\Caching\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\Models\FeatureConfigurations\" />
+    <Folder Include="Application\Environment\" />
+    <Folder Include="Application\Caching\" />
+  </ItemGroup>
 </Project>

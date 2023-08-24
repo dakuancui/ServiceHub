@@ -1,24 +1,26 @@
 using ServiceHub.API.Application.Features;
-using ServiceHub.API.Application.Features.Services;
+using ServiceHub.API.Application.Services;
 using ServiceHub.API.Application.Models;
 using ServiceHub.API.Logger;
 using ServiceHub.ServiceEngine.HostedServices;
 using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
 using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
-//using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
+using ServiceHub.API.Application.Triggers;
+using ServiceHub.API.Application.Consumers;
+using ServiceHub.API.Application.Models.FeatureConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddHostedService<SingletonExampleService>();
-builder.Services.AddHostedService<HealthLinkInterfaceService<IProfile, IFeature>>();
 
-builder.Services.AddScoped<IScopedService, ScopedExampleService>();
-builder.Services.AddHostedService<ScopedBackgroundService>();
+builder.Services.AddSingleton<IFeature, HealthLinkInterfaceFeature<HealthLinkInterfaceConfiguration>>();
+builder.Services.AddHostedService<HealthLinkInterfaceService<IFeature>>();
 
-builder.Services.AddScoped<IPeriodicService, PeriodicExampleService>();
-builder.Services.AddSingleton<PeriodicBackgroundService>();
-builder.Services.AddHostedService(provider => provider.GetRequiredService<PeriodicBackgroundService>());
+//builder.Services.AddScoped<IScopedService, ScopedExampleService>();
+//builder.Services.AddHostedService<ScopedBackgroundService>();
+
+//builder.Services.AddScoped<IPeriodicService, PeriodicExampleService>();
+//builder.Services.AddSingleton<PeriodicBackgroundService>();
+//builder.Services.AddHostedService(provider => provider.GetRequiredService<PeriodicBackgroundService>());
 
 
 builder.Services.AddControllers();

@@ -1,4 +1,5 @@
 ﻿using ServiceHub.API.Application.Features;
+using ServiceHub.API.Application.Models.FeatureConfigurations;
 
 namespace ServiceHub.API.Application.Models
 {
@@ -11,6 +12,6 @@ namespace ServiceHub.API.Application.Models
             _name = name;
         }
 
-        public HealthLinkInterfaceFeature HealthLinkInterfaceFeature { get; set; }
+        public HealthLinkInterfaceConfiguration HealthLinkInterfaceConfiguration { get; set; }
     }
 }
