@@ -1,0 +1,13 @@
+﻿using System;
+namespace ServiceHub.ServiceEngine.ServiceTypes.QueueService
+{
+	public interface IBackgroundTaskQueue
+	{
+        ValueTask QueueBackgroundWorkItemAsync(
+            Func<CancellationToken, ValueTask> workItem);
+
+        ValueTask<Func<CancellationToken, ValueTask>> DequeueAsync(
+            CancellationToken cancellationToken);
+    }
+}
+

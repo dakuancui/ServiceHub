@@ -8,12 +8,35 @@ using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
 using ServiceHub.API.Application.Triggers;
 using ServiceHub.API.Application.Consumers;
 using ServiceHub.API.Application.Models.FeatureConfigurations;
+using System;
+using ServiceHub.ServiceEngine.ServiceTypes.QueueService;
+using ServiceHub.API.Application.Monitor;
+using ServiceHub.API.Application.Services.Profile;
+using ServiceHub.API.Application.Services.MonitoringService;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<IProfileService, ProfileService>();
+builder.Services.AddSingleton<IMonitoringService, MonitoringService>();
+builder.Services.AddSingleton<MonitorLoop>();
+builder.Services.AddHostedService<QueuedHostedService>();
+//builder.Services.AddSingleton<IBackgroundTaskQueue>(_ =>
+//{
+//    if (!int.TryParse(context.Configuration["QueueCapacity"],
+//     out int queueCapacity))
+//    {
+//        queueCapacity = 100;
+//    }
 
-builder.Services.AddSingleton<IFeature, HealthLinkInterfaceFeature<HealthLinkInterfaceConfiguration>>();
-builder.Services.AddHostedService<HealthLinkInterfaceService<IFeature>>();
+//    return new DefaultBackgroundTaskQueue(queueCapacity);
+//});
+builder.Services.AddSingleton<IBackgroundTaskQueue>(_=>
+{
+    return new DefaultBackgroundTaskQueue(100);
+});
+
+//builder.Services.AddSingleton<IFeature, HealthLinkInterfaceFeature<HealthLinkInterfaceConfiguration>>();
+//builder.Services.AddHostedService<HealthLinkInterfaceService<IFeature>>();
 
 //builder.Services.AddScoped<IScopedService, ScopedExampleService>();
 //builder.Services.AddHostedService<ScopedBackgroundService>();
@@ -27,6 +50,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 //builder.Logging.AddJsonConsole(options =>
 //{
@@ -42,6 +66,9 @@ var app = builder.Build();
 var loggerFactory = app.Services.GetService<ILoggerFactory>();
 var logRootPath = @"/Users/DakuanC/Dakuan.asb/spikes/ServiceHub/src";
 loggerFactory?.AddLogRootPath(logRootPath);
+
+var monitorLoop = app.Services.GetRequiredService<MonitorLoop>()!;
+monitorLoop.StartMonitorLoop();
 
 //app.MapGet("/background", (
 //    PeriodicBackgroundService service) =>
@@ -62,6 +89,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

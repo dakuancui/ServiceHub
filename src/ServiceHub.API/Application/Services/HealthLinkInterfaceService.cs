@@ -1,6 +1,5 @@
 ﻿using ServiceHub.API.Application.Models;
 using ServiceHub.ServiceEngine.HostedServices;
-//using ServiceHub.ServiceEngine.ServiceTypes.Singleton;
 using ServiceHub.API.Application.Features;
 
 namespace ServiceHub.API.Application.Services

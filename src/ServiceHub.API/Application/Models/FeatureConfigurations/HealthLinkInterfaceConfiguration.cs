@@ -1,13 +1,10 @@
 ﻿using System;
 namespace ServiceHub.API.Application.Models.FeatureConfigurations
 {
-	public class HealthLinkInterfaceConfiguration : FeatureConfiguraiton
-	{
-		public HealthLinkInterfaceConfiguration()
-		{
-		}
-
-        public override bool IsEnabled { get; set; }
+	public class HealthLinkInterfaceConfiguration 
+	{ 
+		public string WatchDirectPath { get; set; }
+		public string FileFitler { get; set; }
     }
 }
 

@@ -1,0 +1,12 @@
+﻿{
+    "Name" : "TestProfile-1",
+    "DatabaseName" : "Profile-1-Db",
+    "FeatureConfigurations":
+        [
+            {
+                "FeatureName": "HealthLinkInterfaceFeature",
+                "Enabled": true,
+                "Config": "{\"WatchDirectPath\": \"/Users/DakuanC/Dakuan.asb/spikes/ServiceHub/temp\",   \"FileFitler\" : \"*.*\"} "
+            }
+        ]
+}

@@ -11,4 +11,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ServiceTypes\QueueService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ServiceTypes\QueueService\" />
+  </ItemGroup>
 </Project>

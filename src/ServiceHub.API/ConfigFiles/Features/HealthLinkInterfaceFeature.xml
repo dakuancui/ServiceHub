@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<HealthLinkInterfaceFeatrue>
+    <Channels>
+        <Channel>
+             <Trigger>
+                <Name>FileSystemChangeTrigger</Name>
+                <WatchDirectPath></WatchDirectPath>
+                <FileFitler>*.*</FileFitler>
+            </Trigger>
+            <Consumer>
+                <Name>FileConsumer</Name>
+            </Consumer>
+        </Channel>
+<!--        <Channel></Channel>-->
+    </Channels>
+</HealthLinkInterfaceFeatrue>

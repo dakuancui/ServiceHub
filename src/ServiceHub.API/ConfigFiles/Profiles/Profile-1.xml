@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Profile>
+    <Name>TestProfile-1</Name>
+    <DatabaseName>Profile-1Db</DatabaseName>
+    <Features>
+        <HealthLinkInterfaceFeature>
+            <Enabled>true</Enabled>
+            <WatchDirectPath>/Users/DakuanC/Dakuan.asb/spikes/ServiceHub/temp</WatchDirectPath>
+            <FileFitler>*.*</FileFitler>
+        </HealthLinkInterfaceFeature>
+    </Features>
+</Profile>

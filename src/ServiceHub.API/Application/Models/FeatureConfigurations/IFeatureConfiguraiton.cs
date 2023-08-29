@@ -2,6 +2,8 @@
 {
     public interface IFeatureConfiguraiton
     {
-        public bool IsEnabled { get; set; }
+        public string FeatrueName { get; set; }
+        public bool Enabled { get; set; }
+        public string Config { get; set; }
     }
 }

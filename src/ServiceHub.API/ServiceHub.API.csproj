@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,12 +19,22 @@
 
   <ItemGroup>
     <None Remove="Application\Models\FeatureConfigurations\" />
-    <None Remove="Application\Environment\" />
     <None Remove="Application\Caching\" />
+    <None Remove="Helper\" />
+    <None Remove="Application\Monitor\" />
+    <None Remove="ConfigFiles\Profiles\" />
+    <None Remove="ConfigFiles\Features\" />
+    <None Remove="Application\Services\Profile\" />
+    <None Remove="Application\Services\MonitoringService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\Models\FeatureConfigurations\" />
-    <Folder Include="Application\Environment\" />
     <Folder Include="Application\Caching\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Application\Monitor\" />
+    <Folder Include="ConfigFiles\Profiles\" />
+    <Folder Include="ConfigFiles\Features\" />
+    <Folder Include="Application\Services\Profile\" />
+    <Folder Include="Application\Services\MonitoringService\" />
   </ItemGroup>
 </Project>

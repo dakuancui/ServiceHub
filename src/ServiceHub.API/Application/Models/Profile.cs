@@ -5,13 +5,8 @@ namespace ServiceHub.API.Application.Models
 {
     public class Profile : IProfile
     {
-        public string Name => _name;
-        private string _name { get; set; }
-        public Profile(string name)
-        {
-            _name = name;
-        }
-
-        public HealthLinkInterfaceConfiguration HealthLinkInterfaceConfiguration { get; set; }
+        public string Name { get; set; }
+        public string DatabaseName { get; set; }
+        public IEnumerable<IFeatureConfiguraiton> FeatureConfigurations { get; set; }
     }
 }

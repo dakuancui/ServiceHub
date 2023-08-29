@@ -31,7 +31,6 @@ namespace ServiceHub.API.Application.Consumers
                     counter++;
                 }
             }
-
             _logger.LogInformation($"Completed read of {fullPath}");
         }
 
