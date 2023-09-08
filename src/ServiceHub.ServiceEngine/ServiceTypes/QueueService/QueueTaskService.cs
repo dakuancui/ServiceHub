@@ -1,13 +1,12 @@
-﻿using System;
-using System.Threading.Channels;
+﻿using System.Threading.Channels;
 
 namespace ServiceHub.ServiceEngine.ServiceTypes.QueueService
 {
-    public sealed class DefaultBackgroundTaskQueue : IBackgroundTaskQueue
+    public sealed class QueueTaskService : IQueueTaskService
     {
         private readonly Channel<Func<CancellationToken, ValueTask>> _queue;
-
-        public DefaultBackgroundTaskQueue(int capacity)
+        private SemaphoreSlim _signal = new SemaphoreSlim(0);
+        public QueueTaskService(int capacity)
         {
             BoundedChannelOptions options = new(capacity)
             {
@@ -25,11 +24,14 @@ namespace ServiceHub.ServiceEngine.ServiceTypes.QueueService
             }
 
             await _queue.Writer.WriteAsync(workItem);
+            _signal.Release();
         }
 
         public async ValueTask<Func<CancellationToken, ValueTask>> DequeueAsync(
             CancellationToken cancellationToken)
         {
+            await _signal.WaitAsync(cancellationToken);
+
             Func<CancellationToken, ValueTask>? workItem =
                 await _queue.Reader.ReadAsync(cancellationToken);
 

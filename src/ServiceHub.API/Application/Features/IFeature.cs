@@ -1,15 +1,12 @@
-﻿using System;
-using ServiceHub.API.Application.Consumers;
-using ServiceHub.API.Application.Triggers;
+﻿using ServiceHub.API.Application.Models.FeatureConfigurations;
 
 namespace ServiceHub.API.Application.Features
 {
-	public interface IFeature
+    public interface IFeature<C> where C : IFeatureConfiguraiton
 	{
-		public IEnumerable<ITrigger> Triggers { get; }
-        public IEnumerable<IConsumer> Consumers { get; }
+        public string ProfileName { get; }
         public string Name { get; }
-        public void Apply();
+        public void Apply(C featureConfig, CancellationToken cancellationToken);
     }
 }
 

@@ -1,34 +1,41 @@
-﻿using ServiceHub.API.Application.Consumers;
+﻿using System.Text.Json;
+using ServiceHub.API.Application.Consumers;
 using ServiceHub.API.Application.Models.FeatureConfigurations;
 using ServiceHub.API.Application.Triggers;
 
 namespace ServiceHub.API.Application.Features
 {
-    public class HealthLinkInterfaceFeature<C> : Feature where C : HealthLinkInterfaceConfiguration
+    public class HealthLinkInterfaceFeature<C> : Feature<C> where C : IFeatureConfiguraiton 
     {
-        private readonly ILogger<HealthLinkInterfaceFeature<HealthLinkInterfaceConfiguration>> _logger;
-        protected IList<ITrigger> _triggers { get; set; } = new List<ITrigger>();
-        protected IList<IConsumer> _consumers { get; set; } = new List<IConsumer>();
+        private readonly ILogger<HealthLinkInterfaceFeature<IFeatureConfiguraiton>> _logger;
+        private readonly string _profileName;
+        private readonly string _featureName;
 
-        public HealthLinkInterfaceFeature(ILogger<HealthLinkInterfaceFeature<HealthLinkInterfaceConfiguration>> logger)
+        public HealthLinkInterfaceFeature(
+            ILogger<HealthLinkInterfaceFeature<IFeatureConfiguraiton>> logger,
+            string profileName, string featureName
+            ): base(logger)
         {
             _logger = logger;
-            _triggers.Add(new FileSystemChangeTrigger(_logger));
-            _consumers.Add(new FileConsumer(_logger));
+            _profileName = profileName;
+            _featureName = featureName;
         }
 
-        public override IEnumerable<ITrigger> Triggers
-            => _triggers.AsEnumerable();
+        public override string ProfileName => _profileName;
+        public override string Name => _featureName;
 
-
-        public override IEnumerable<IConsumer> Consumers
-            => _consumers.AsEnumerable();
-
-        public override string Name => "HealthLinkInterface feature";
-
-        public override void Apply()
+        public override void Apply(C featureConfig, CancellationToken cancellationToken)
         {
-            _triggers.First().Start((FileSystemEventHandler)_consumers.First().ConsumeHandler);
+            var config = featureConfig.Config;
+            if (!string.IsNullOrWhiteSpace(config))
+            { 
+                var configObject = JsonSerializer.Deserialize<HealthLinkInterfaceConfiguration>(config);
+                var watchPath = configObject?.WatchDirectPath;
+                var fileFilter = configObject?.FileFitler;
+                Triggers.Add(new FileSystemChangeTrigger(_logger, watchPath, fileFilter));
+                Consumers.Add(new FileConsumer(_logger));
+                Triggers.First().Start((FileSystemEventHandler)Consumers.First().ConsumeHandler, cancellationToken);
+            }
         }
     }
 }

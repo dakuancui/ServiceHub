@@ -1,5 +1,4 @@
-﻿using System;
-namespace ServiceHub.API.Application.Models.FeatureConfigurations
+﻿namespace ServiceHub.API.Application.Models.FeatureConfigurations
 {
     public class FeatureConfiguraiton : IFeatureConfiguraiton
     {

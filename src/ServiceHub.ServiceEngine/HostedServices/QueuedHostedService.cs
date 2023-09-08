@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ServiceHub.ServiceEngine.ServiceTypes.QueueService;
 
@@ -7,22 +6,19 @@ namespace ServiceHub.ServiceEngine.HostedServices
 {
     public sealed class QueuedHostedService : BackgroundService
     {
-        private readonly IBackgroundTaskQueue _taskQueue;
+        private readonly IQueueTaskService _taskQueue;
         private readonly ILogger<QueuedHostedService> _logger;
 
         public QueuedHostedService(
-            IBackgroundTaskQueue taskQueue,
+            IQueueTaskService taskQueue,
             ILogger<QueuedHostedService> logger) =>
             (_taskQueue, _logger) = (taskQueue, logger);
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation(
-                $"{nameof(QueuedHostedService)} is running.{Environment.NewLine}" +
-                $"{Environment.NewLine}Tap W to add a work item to the " +
-                $"background queue.{Environment.NewLine}");
-
-            return ProcessTaskQueueAsync(stoppingToken);
+                $"{nameof(QueuedHostedService)} is running.{Environment.NewLine}");
+            await ProcessTaskQueueAsync(stoppingToken);
         }
 
         private async Task ProcessTaskQueueAsync(CancellationToken stoppingToken)
@@ -57,3 +53,4 @@ namespace ServiceHub.ServiceEngine.HostedServices
     }
 }
 
+//504346954

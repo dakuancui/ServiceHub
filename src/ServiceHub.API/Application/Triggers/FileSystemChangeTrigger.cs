@@ -1,30 +1,28 @@
-﻿using System;
-using System.IO;
-using ServiceHub.API.Application.Features;
+﻿using ServiceHub.API.Application.Features;
+using ServiceHub.API.Application.Models.FeatureConfigurations;
 
 namespace ServiceHub.API.Application.Triggers
 {
-	public class FileSystemChangeTrigger : ITrigger
+    public class FileSystemChangeTrigger : ITrigger, IDisposable
 	{
-        private readonly ILogger<IFeature> _logger;
-        private readonly string _directoryPath = @"/Users/DakuanC/Dakuan.asb/spikes/ServiceHub/temp";
-        private readonly string _fileFilter = "*.*";
+        private readonly ILogger<IFeature<IFeatureConfiguraiton>> _logger;
+        private readonly string _directoryPath;
+        private readonly string _fileFilter;
         private readonly FileSystemWatcher _watcher;
-        //private readonly IServiceProvider _serviceProvider;
+        private bool _disposedValue;
 
-        public FileSystemChangeTrigger(ILogger<IFeature> logger
-            //, IServiceProvider serviceProvider
-            )
+        public FileSystemChangeTrigger(ILogger<IFeature<IFeatureConfiguraiton>> logger, string directoryPath, string fileFilter)
 		{
             _logger = logger;
-            //_serviceProvider = serviceProvider;
+            _directoryPath = directoryPath;
+            _fileFilter = fileFilter;
             if (!Directory.Exists(_directoryPath))
                 Directory.CreateDirectory(_directoryPath);
             _watcher = new FileSystemWatcher(_directoryPath, _fileFilter);
         }
 
 
-        public void Start(object customerAction)
+        public void Start(object customerAction, CancellationToken cancellationToken)
         {
             _watcher.NotifyFilter = NotifyFilters.Attributes
                                  | NotifyFilters.CreationTime
@@ -41,16 +39,13 @@ namespace ServiceHub.API.Application.Triggers
             _watcher.Renamed += OnRenamed;
             _watcher.Error += OnError;
 
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                _watcher.EnableRaisingEvents = true;
+            }
 
-            _watcher.EnableRaisingEvents = true;
             _watcher.IncludeSubdirectories = true;
-
             _logger.LogInformation($"File Watching has started for directory {_directoryPath}");
-        }
-
-        public Task Inbound()
-        {
-            throw new NotImplementedException();
         }
 
         private void OnError(object sender, ErrorEventArgs e)
@@ -70,20 +65,33 @@ namespace ServiceHub.API.Application.Triggers
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
+
         }
 
-        //public void OnCreated(object sender, FileSystemEventArgs e)
-        //{
-        //    using (var scope = _serviceProvider.CreateScope())
-        //    {
-        //        var consumerService = scope.ServiceProvider.GetRequiredService<FileConsumer>();
-        //        Task.Run(() => consumerService.Consume(e.FullPath));
-        //    }
-        //}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-        //public void ConsumerEventHandler(object sender, FileSystemEventArgs e)
-        //{
-        //}
+        ~FileSystemChangeTrigger() => Dispose(false);
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    _watcher.EnableRaisingEvents = false;
+                }
+                _disposedValue = true;
+            }
+        }
+
+        public void Stop()
+        {
+            Dispose();
+        }
     }
 }
 

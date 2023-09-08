@@ -19,22 +19,18 @@
 
   <ItemGroup>
     <None Remove="Application\Models\FeatureConfigurations\" />
-    <None Remove="Application\Caching\" />
-    <None Remove="Helper\" />
-    <None Remove="Application\Monitor\" />
     <None Remove="ConfigFiles\Profiles\" />
     <None Remove="ConfigFiles\Features\" />
     <None Remove="Application\Services\Profile\" />
-    <None Remove="Application\Services\MonitoringService\" />
+    <None Remove="Application\Providers\" />
+    <None Remove="Application\Models\FeatureControl\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\Models\FeatureConfigurations\" />
-    <Folder Include="Application\Caching\" />
-    <Folder Include="Helper\" />
-    <Folder Include="Application\Monitor\" />
     <Folder Include="ConfigFiles\Profiles\" />
     <Folder Include="ConfigFiles\Features\" />
     <Folder Include="Application\Services\Profile\" />
-    <Folder Include="Application\Services\MonitoringService\" />
+    <Folder Include="Application\Providers\" />
+    <Folder Include="Application\Models\FeatureControl\" />
   </ItemGroup>
 </Project>

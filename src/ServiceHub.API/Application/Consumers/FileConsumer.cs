@@ -1,20 +1,19 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using ServiceHub.API.Application.Features;
+﻿using ServiceHub.API.Application.Features;
+using ServiceHub.API.Application.Models.FeatureConfigurations;
 
 namespace ServiceHub.API.Application.Consumers
 {
-	public class FileConsumer : Consumer
+    public class FileConsumer : Consumer
 	{
-        private readonly ILogger<IFeature> _logger;
+        private readonly ILogger<IFeature<IFeatureConfiguraiton>> _logger;
 
-		public FileConsumer(ILogger<IFeature> logger)
+		public FileConsumer(ILogger<IFeature<IFeatureConfiguraiton>> logger)
 		{
             _logger = logger;
 		}
 
 
-        public override async Task Consume(string fullPath)
+        public async Task Consume(string fullPath)
         {
             if (!File.Exists(fullPath))
                 return;

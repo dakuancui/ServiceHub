@@ -1,9 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ServiceHub.API.Application.Features;
-using ServiceHub.API.Application.Services;
-using ServiceHub.API.Application.Services.MonitoringService;
-using ServiceHub.ServiceEngine.HostedServices;
-using ServiceHub.ServiceEngine.ServiceTypes.Periodic;
+using ServiceHub.API.Application.Services.Management;
 
 namespace ServiceHub.API.Controllers
 {
@@ -12,60 +8,30 @@ namespace ServiceHub.API.Controllers
     public class ServiceHubController : ControllerBase
     {
         private readonly ILogger<ServiceHubController> _logger;
-        //private readonly PeriodicBackgroundService _periodicBackgroundService;
-        //private readonly IServiceProvider _serviceProvider;
-        private readonly IMonitoringService _monitoringService;
+        private readonly IManagementService _manageMentService;
 
         public ServiceHubController(ILogger<ServiceHubController> logger,
-            //PeriodicBackgroundService periodicBackgroundService,
-            //IServiceProvider serviceProvider
-            IMonitoringService monitoringService
+            IManagementService managementService
             )
         {
             _logger = logger;
-            //_periodicBackgroundService = periodicBackgroundService;
-            //_serviceProvider = serviceProvider;
-            _monitoringService = monitoringService;
+            _manageMentService = managementService;
         }
 
-        //[HttpGet(Name = "PeriodicService")]
-        //public PeriodicHostedServiceState Get()
-        //{
-        //    return new PeriodicHostedServiceState(_periodicBackgroundService.IsEnabled);
-        //}
-
-        //[HttpPatch(Name = "Service")]
-        //public IActionResult Patch(string servicetype, [FromBody] PeriodicHostedServiceState state)
-        //{
-        //    if (servicetype == "periodic")
-        //    {
-        //        _periodicBackgroundService.IsEnabled = state.IsEnabled;
-        //    }
-        //    return Accepted();
-        //}
-
-        //[HttpPatch(Name = "ServiceStart")]
-        //public IActionResult ServiceStart([FromBody] bool start)
-        //{
-        //    if (start)
-        //    {
-        //        //_serviceCollection.AddHostedService<HealthLinkInterfaceService<IFeature>>();
-        //    }
-        //    return Accepted();
-        //}
-
-        //[HttpGet(Name = "LoadProfiles")]
-        //public IActionResult LoadProfiles()
-        //{
-        //    return Accepted();
-        //}
-
-        [HttpPatch(Name = "AddProfile")]
-        public async Task<IActionResult> AddProfile()
+        [HttpPatch("LoadProfilesRunFeatures",Name = nameof(LoadProfilesAndRunFeatures))]
+        public async Task<IActionResult> LoadProfilesAndRunFeatures()
         {
-            await _monitoringService.AddProfileAndRunFeatures();
+            await _manageMentService.LoadProfilesAndRunFeatrues();
             return Accepted();
         }
 
+        [HttpPatch("StopFeature", Name = nameof(StopProfileFeature))]
+        public IActionResult StopProfileFeature([FromQuery] string profileName, string featureName)
+        {
+            if (_manageMentService.StopFeatrue(profileName, featureName))
+                return Accepted();
+            else
+                return Conflict();
+        }
     }
 }
