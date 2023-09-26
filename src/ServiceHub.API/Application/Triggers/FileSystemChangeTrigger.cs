@@ -1,5 +1,6 @@
-﻿using ServiceHub.API.Application.Features;
-using ServiceHub.API.Application.Models.FeatureConfigurations;
+﻿using ServiceHub.Core.Application.Feature;
+using ServiceHub.Core.Application.Models.FeatureConfiguration;
+using ServiceHub.Core.Application.Trigger;
 
 namespace ServiceHub.API.Application.Triggers
 {

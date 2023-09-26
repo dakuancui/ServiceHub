@@ -1,10 +1,10 @@
 ﻿using ServiceHub.API.Application.Features;
-using ServiceHub.API.Application.Models.FeatureControl;
-using ServiceHub.API.Application.Models.FeatureConfigurations;
-using ServiceHub.API.Application.Providers;
 using ServiceHub.API.Application.Services.Profile;
-using ServiceHub.ServiceEngine.ServiceTypes.QueueService;
-using ServiceHub.API.Application.Models.Statistic;
+using ServiceHub.Core.Application.Feature.Control;
+using ServiceHub.Core.Application.Models.FeatureConfiguration;
+using ServiceHub.Core.Application.Models.FeatureControl;
+using ServiceHub.Core.Application.Models.Statistic;
+using ServiceHub.Core.HostedServices.ServiceTypes.QueueService;
 using System.Text.Json;
 
 namespace ServiceHub.API.Application.Services.Management
@@ -48,7 +48,7 @@ namespace ServiceHub.API.Application.Services.Management
             foreach(var profile in profiles)
             {
                 var profileId = Guid.NewGuid();
-                _logger.LogInformation("Queue a profile's {Guid} all featrues are starting.", profileId);
+                _logger.LogInformation("Queuing a profile's {Guid} all featrues are starting.", profileId);
                 var profileStatistic = new ProfileStatistics
                 {
                     Id = profileId.ToString(),
@@ -85,7 +85,7 @@ namespace ServiceHub.API.Application.Services.Management
 
         private async ValueTask BuildMockProfileItem(CancellationToken token)
         {
-            var mockProfile1 = new Models.Profile
+            var mockProfile1 = new Core.Application.Models.Profile
             {
                 Name = "TestProfile-3",
                 DatabaseName = "Profile-3-Db",
@@ -101,7 +101,7 @@ namespace ServiceHub.API.Application.Services.Management
             };
             //var mockProfile = new List<IProfile> { mockProfile1 }.AsEnumerable();
             var profileId = Guid.NewGuid();
-            _logger.LogInformation("Queue a profile's {Guid} all featrues are starting.", profileId);
+            _logger.LogInformation("Queuing a profile's {Guid} all featrues are starting.", profileId);
             var profileStatistic = new ProfileStatistics
             {
                 Id = profileId.ToString(),

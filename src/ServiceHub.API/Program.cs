@@ -1,10 +1,10 @@
-using ServiceHub.API.Application.Models.FeatureControl;
-using ServiceHub.API.Logger;
-using ServiceHub.ServiceEngine.HostedServices;
-using ServiceHub.ServiceEngine.ServiceTypes.QueueService;
+using ServiceHub.Core.Logger;
 using ServiceHub.API.Application.Services.Profile;
 using ServiceHub.API.Application.Services.Management;
-using ServiceHub.API.Application.Providers;
+using ServiceHub.Core.HostedServices.BackgroundServices;
+using ServiceHub.Core.HostedServices.ServiceTypes.QueueService;
+using ServiceHub.Core.Application.Models.FeatureControl;
+using ServiceHub.Core.Application.Feature.Control;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,9 +1,8 @@
-﻿using System;
-using ServiceHub.API.Application.Models;
+﻿using ServiceHub.Core.Application.Models;
 
 namespace ServiceHub.API.Application.Services.Profile
 {
-	public interface IProfileService
+    public interface IProfileService
 	{
 		public IEnumerable<IProfile> GetProfiles();
 	}

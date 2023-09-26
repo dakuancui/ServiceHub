@@ -1,5 +1,5 @@
-﻿using ServiceHub.API.Application.Models;
-using ServiceHub.API.Application.Models.FeatureConfigurations;
+﻿using ServiceHub.Core.Application.Models;
+using ServiceHub.Core.Application.Models.FeatureConfiguration;
 
 namespace ServiceHub.API.Application.Services.Profile
 {
@@ -11,7 +11,7 @@ namespace ServiceHub.API.Application.Services.Profile
 
 		public IEnumerable<IProfile> GetProfiles()
 		{
-			var mockProfile1 = new Models.Profile
+			var mockProfile1 = new Core.Application.Models.Profile
 			{
 				Name = "TestProfile-1",
 				DatabaseName = "Profile-1-Db",
@@ -25,7 +25,7 @@ namespace ServiceHub.API.Application.Services.Profile
                     }
 				}.AsEnumerable()
 			};
-            var mockProfile2 = new Models.Profile
+            var mockProfile2 = new Core.Application.Models.Profile
             {
                 Name = "TestProfile-2",
                 DatabaseName = "Profile-2-Db",

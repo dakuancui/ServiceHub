@@ -2,6 +2,8 @@
 using ServiceHub.API.Application.Consumers;
 using ServiceHub.API.Application.Models.FeatureConfigurations;
 using ServiceHub.API.Application.Triggers;
+using ServiceHub.Core.Application.Feature;
+using ServiceHub.Core.Application.Models.FeatureConfiguration;
 
 namespace ServiceHub.API.Application.Features
 {

@@ -1,5 +1,4 @@
-﻿
-using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
+﻿using ServiceHub.ServiceEngine.ServiceTypes.Scoped;
 
 namespace ServiceHub.API.Application.Services
 {

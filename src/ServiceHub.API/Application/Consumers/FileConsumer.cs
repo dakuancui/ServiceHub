@@ -1,5 +1,6 @@
-﻿using ServiceHub.API.Application.Features;
-using ServiceHub.API.Application.Models.FeatureConfigurations;
+﻿using ServiceHub.Core.Application.Consumer;
+using ServiceHub.Core.Application.Feature;
+using ServiceHub.Core.Application.Models.FeatureConfiguration;
 
 namespace ServiceHub.API.Application.Consumers
 {

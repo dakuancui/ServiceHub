@@ -15,6 +15,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceHub.ServiceEngine\ServiceHub.ServiceEngine.csproj" />
+    <ProjectReference Include="..\ServiceHub.Core\ServiceHub.Core.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -22,17 +25,11 @@
     <None Remove="ConfigFiles\Profiles\" />
     <None Remove="ConfigFiles\Features\" />
     <None Remove="Application\Services\Profile\" />
-    <None Remove="Application\Providers\" />
-    <None Remove="Application\Models\FeatureControl\" />
-    <None Remove="Application\Models\Statistic\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\Models\FeatureConfigurations\" />
     <Folder Include="ConfigFiles\Profiles\" />
     <Folder Include="ConfigFiles\Features\" />
     <Folder Include="Application\Services\Profile\" />
-    <Folder Include="Application\Providers\" />
-    <Folder Include="Application\Models\FeatureControl\" />
-    <Folder Include="Application\Models\Statistic\" />
   </ItemGroup>
 </Project>

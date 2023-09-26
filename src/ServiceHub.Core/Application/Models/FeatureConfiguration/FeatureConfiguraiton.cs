@@ -1,0 +1,12 @@
+﻿namespace ServiceHub.Core.Application.Models.FeatureConfiguration
+{
+    public class FeatureConfiguraiton : IFeatureConfiguraiton
+    {
+        public string FeatrueName { get; set; }
+
+        public bool Enabled { get; set; }
+
+        public string Config { get; set; }
+    }
+}
+
