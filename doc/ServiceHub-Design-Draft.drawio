@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net" modified="2023-09-26T07:26:58.817Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="KQ1Zny29tS82O9op0w_q" version="21.7.5" type="device">
+  <diagram name="Page-1" id="mAmLwDS0cRExbPr78ccT">
+    <mxGraphModel dx="1647" dy="869" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AW84U4UxiX8v9MRDQezM-5" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="160" width="280" height="610" as="geometry" />
+        </mxCell>
+        <mxCell id="AW84U4UxiX8v9MRDQezM-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="395" y="175" width="145" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="AW84U4UxiX8v9MRDQezM-2" value="" style="dashed=0;outlineConnect=0;html=1;align=center;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.weblogos.json" vertex="1" parent="1">
+          <mxGeometry x="432.5" y="310" width="70" height="75.8" as="geometry" />
+        </mxCell>
+        <mxCell id="AW84U4UxiX8v9MRDQezM-3" value="" style="dashed=0;outlineConnect=0;html=1;align=center;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.weblogos.json" vertex="1" parent="1">
+          <mxGeometry x="430" y="210" width="70" height="75.8" as="geometry" />
+        </mxCell>
+        <mxCell id="AW84U4UxiX8v9MRDQezM-4" value="ServiceHub,Core.Management" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="160" width="200" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

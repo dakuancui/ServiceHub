@@ -2,8 +2,10 @@
 {
     public interface IManagementService
     {
-		public ValueTask LoadProfilesAndRunFeatrues();
+		public ValueTask LoadProfilesAndRunFeatures();
+        public ValueTask AddProfileAndRunFeatures();
         public bool StopFeatrue(string profileName, string featureName);
+        public string CurrentStatus();
     }
 }
 

@@ -18,10 +18,17 @@ namespace ServiceHub.API.Controllers
             _manageMentService = managementService;
         }
 
+        [HttpPatch("AddProfileRunFeatures", Name = nameof(AddProfileRunFeatures))]
+        public async Task<IActionResult> AddProfileRunFeatures()
+        {
+            await _manageMentService.AddProfileAndRunFeatures();
+            return Accepted();
+        }
+
         [HttpPatch("LoadProfilesRunFeatures",Name = nameof(LoadProfilesAndRunFeatures))]
         public async Task<IActionResult> LoadProfilesAndRunFeatures()
         {
-            await _manageMentService.LoadProfilesAndRunFeatrues();
+            await _manageMentService.LoadProfilesAndRunFeatures();
             return Accepted();
         }
 
@@ -32,6 +39,12 @@ namespace ServiceHub.API.Controllers
                 return Accepted();
             else
                 return Conflict();
+        }
+
+        [HttpGet("CurrentStatus", Name = nameof(CurrentStatus))]
+        public IActionResult CurrentStatus()
+        {
+            return Ok(_manageMentService.CurrentStatus());
         }
     }
 }

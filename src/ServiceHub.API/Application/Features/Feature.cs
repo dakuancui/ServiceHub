@@ -1,6 +1,7 @@
 ﻿using ServiceHub.API.Application.Consumers;
 using ServiceHub.API.Application.Models.FeatureConfigurations;
 using ServiceHub.API.Application.Models.FeatureControl;
+using ServiceHub.API.Application.Models.Statistic;
 using ServiceHub.API.Application.Triggers;
 
 namespace ServiceHub.API.Application.Features
@@ -51,6 +52,12 @@ namespace ServiceHub.API.Application.Features
                 {
                     trigger.Stop();
                     _logger.LogInformation("Feature {0} from profile {1} stopped.", this.Name, this.ProfileName);
+                    var profile = Statistics.RunningStatistics.FirstOrDefault(x => x.Value.ProfileName == this.ProfileName).Value;
+                    if (profile != null)
+                    {
+                        profile.FeaturesStatistics.First(x => x.FeatureName == Name).Status = "Stopped";
+                        Statistics.RunningStatistics[profile.Id] = profile;
+                    }
                 }
                 Dispose();
             }

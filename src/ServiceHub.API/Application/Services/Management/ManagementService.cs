@@ -4,6 +4,8 @@ using ServiceHub.API.Application.Models.FeatureConfigurations;
 using ServiceHub.API.Application.Providers;
 using ServiceHub.API.Application.Services.Profile;
 using ServiceHub.ServiceEngine.ServiceTypes.QueueService;
+using ServiceHub.API.Application.Models.Statistic;
+using System.Text.Json;
 
 namespace ServiceHub.API.Application.Services.Management
 {
@@ -35,7 +37,7 @@ namespace ServiceHub.API.Application.Services.Management
             return true;
         }
 
-        public async ValueTask LoadProfilesAndRunFeatrues()
+        public async ValueTask LoadProfilesAndRunFeatures()
         {
             await _taskQueue.QueueBackgroundWorkItemAsync(BuildWorkItemAsync);
         }
@@ -47,6 +49,13 @@ namespace ServiceHub.API.Application.Services.Management
             {
                 var profileId = Guid.NewGuid();
                 _logger.LogInformation("Queue a profile's {Guid} all featrues are starting.", profileId);
+                var profileStatistic = new ProfileStatistics
+                {
+                    Id = profileId.ToString(),
+                    Status = "Loading",
+                    ProfileName = profile.Name
+                };
+                var featuresStatistic = new List<FeatureStatistics>();
                 foreach (var featureConfig in profile.FeatureConfigurations)
                 {
                     if (featureConfig.Enabled)
@@ -58,13 +67,73 @@ namespace ServiceHub.API.Application.Services.Management
                             var feature = new HealthLinkInterfaceFeature<IFeatureConfiguraiton>(logger, profile.Name, featureName);
                             feature.Subscribe(_featureCommand);
                             feature.Apply(featureConfig, token);
+                            featuresStatistic.Add(new FeatureStatistics { FeatureName = featureName, Status = "Running" });
                         }
                     }
                 }
+                profileStatistic.Status = "Loaded";
+                profileStatistic.FeaturesStatistics = featuresStatistic;
+                Statistics.RunningStatistics.Add(profileId.ToString(), profileStatistic);
                 _logger.LogInformation("Queued a profile's {Guid} all featrues are started.", profileId);
             }
         }
 
+        public async ValueTask AddProfileAndRunFeatures()
+        {
+            await _taskQueue.QueueBackgroundWorkItemAsync(BuildMockProfileItem);
+        }
+
+        private async ValueTask BuildMockProfileItem(CancellationToken token)
+        {
+            var mockProfile1 = new Models.Profile
+            {
+                Name = "TestProfile-3",
+                DatabaseName = "Profile-3-Db",
+                FeatureConfigurations = new List<IFeatureConfiguraiton>
+                {
+                    new FeatureConfiguraiton
+                    {
+                        FeatrueName = "HealthLinkInterfaceFeature",
+                        Enabled = true,
+                        Config = "{\"WatchDirectPath\": \"/Users/DakuanC/Dakuan.asb/spikes/ServiceHub/temp2\",   \"FileFitler\" : \"*.*\"} "
+                    }
+                }.AsEnumerable()
+            };
+            //var mockProfile = new List<IProfile> { mockProfile1 }.AsEnumerable();
+            var profileId = Guid.NewGuid();
+            _logger.LogInformation("Queue a profile's {Guid} all featrues are starting.", profileId);
+            var profileStatistic = new ProfileStatistics
+            {
+                Id = profileId.ToString(),
+                Status = "Loading",
+                ProfileName = mockProfile1.Name
+            };
+            var featuresStatistic = new List<FeatureStatistics>();
+            foreach (var featureConfig in mockProfile1.FeatureConfigurations)
+            {
+                if (featureConfig.Enabled)
+                {
+                    var featureName = featureConfig.FeatrueName;
+                    if (featureName == "HealthLinkInterfaceFeature")
+                    {
+                        var logger = _serviceProvider.GetRequiredService<ILogger<HealthLinkInterfaceFeature<IFeatureConfiguraiton>>>();
+                        var feature = new HealthLinkInterfaceFeature<IFeatureConfiguraiton>(logger, mockProfile1.Name, featureName);
+                        feature.Subscribe(_featureCommand);
+                        feature.Apply(featureConfig, token);
+                        featuresStatistic.Add(new FeatureStatistics { FeatureName = featureName, Status = "Running" });
+                    }
+                }
+            }
+            profileStatistic.Status = "Loaded";
+            profileStatistic.FeaturesStatistics = featuresStatistic;
+            Statistics.RunningStatistics.Add(profileId.ToString(), profileStatistic);
+            _logger.LogInformation("Queued a profile's {Guid} all featrues are started.", profileId);
+        }
+
+        public string CurrentStatus()
+        {
+            return JsonSerializer.Serialize(Statistics.RunningStatistics);
+        }
     }
 }
 

@@ -24,6 +24,7 @@
     <None Remove="Application\Services\Profile\" />
     <None Remove="Application\Providers\" />
     <None Remove="Application\Models\FeatureControl\" />
+    <None Remove="Application\Models\Statistic\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\Models\FeatureConfigurations\" />
@@ -32,5 +33,6 @@
     <Folder Include="Application\Services\Profile\" />
     <Folder Include="Application\Providers\" />
     <Folder Include="Application\Models\FeatureControl\" />
+    <Folder Include="Application\Models\Statistic\" />
   </ItemGroup>
 </Project>

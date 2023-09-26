@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHub.UnitTest", "Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.ServiceEngine", "ServiceHub.ServiceEngine\ServiceHub.ServiceEngine.csproj", "{726523DA-E2AF-42C7-8631-B538779A4C4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Core", "ServiceHub.Core\ServiceHub.Core.csproj", "{D058656A-A3F0-44B3-B8DD-9C05D935B0D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{726523DA-E2AF-42C7-8631-B538779A4C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726523DA-E2AF-42C7-8631-B538779A4C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726523DA-E2AF-42C7-8631-B538779A4C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D058656A-A3F0-44B3-B8DD-9C05D935B0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D058656A-A3F0-44B3-B8DD-9C05D935B0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D058656A-A3F0-44B3-B8DD-9C05D935B0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D058656A-A3F0-44B3-B8DD-9C05D935B0D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
